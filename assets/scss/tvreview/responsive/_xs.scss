@@ -1,0 +1,24 @@
+@include media-breakpoint-down(xs) {
+	.box {
+		&.cols {
+			&.cols-2 {
+				ul li {
+					width: 100%;
+					clear: none;
+				}
+			}
+			&.cols-4 {
+				ul li {
+					width: 100%;
+					clear: none;
+				}
+			}
+			&.cols-6 {
+				ul li {
+					width: 100%;
+					clear: none;
+				}
+			}
+		}
+	}
+}

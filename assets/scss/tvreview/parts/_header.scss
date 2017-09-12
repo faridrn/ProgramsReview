@@ -1,0 +1,25 @@
+#header {
+    background: $header-bg; height: $header-height; transition: 0.2s all;
+    color: $header-text-color; overflow: visible;
+	position: fixed; top: 0; right: 0; width: 100%; z-index: 500;
+    /*border-top: 3px solid #fff;*/
+    a {
+        color: $header-link-color; text-decoration: none; transition: $t;
+        &:hover { color: $header-link-hover-color; }
+    }
+    .container { position: relative; /*background: rgba(0, 0, 0, 0.6);*/}
+    .logo {
+        @include text-hide;
+        display: block; background: url('../img/s-logo.png') no-repeat right center transparent;
+        width: $logo-width; height: $logo-height; /*position: absolute; top: 0; right: -$logo-width - $grid-gutter-width;*/
+        background: $light;
+    }
+	.col-9 {
+		//right: $logo-width;
+	}
+	/*& + * { padding-top: $header-height + $grid-gutter-width }*/
+	.sticky-header & {
+		height: $header-height / 2;
+		#menu ul { margin-top: 0; }
+	}
+}

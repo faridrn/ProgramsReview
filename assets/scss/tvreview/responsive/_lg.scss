@@ -1,0 +1,16 @@
+/*@include media-breakpoint-down(lg) {
+	.box {
+		&.cols {
+			&.cols-4 {
+				ul li {
+					width: 25%;
+				}
+			}
+			&.cols-6 {
+				ul li {
+					width: 16.666667%;
+				}
+			}
+		}
+	}
+}*/

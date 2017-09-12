@@ -1,0 +1,63 @@
+.box {
+    &.cols {
+        ul {
+            @include clearfix;
+            margin: 0 ($grid-gutter-width / -2);
+            li {
+                width: 50%; float: right;
+                border-left: $grid-gutter-width / 2 solid transparent; border-right: $grid-gutter-width / 2 solid transparent;
+            }
+        }
+        &.cols-2 ul li {
+            width: 50%;
+            &:nth-child(2n+1) { clear: both; }
+        }
+        &.cols-3 ul li {
+            width: 33.333333%;
+            &:nth-child(3n+1) { clear: both; }
+            h3 { font-size: 16px; }
+        }
+        &.cols-4 ul li {
+            width: 25%;
+            &:nth-child(4n+1) { clear: both; }
+        }
+        &.cols-5 ul li {
+            width: 20%;
+            &:nth-child(5n+1) { clear: both; }
+        }
+        &.cols-6 ul li {
+            width: 16.666666%;
+            h3 {
+                font-size: 14px; font-family: $font-family-base;
+            }
+            &:nth-child(6n+1) { clear: both; }
+        }
+        &.first-featured ul li {
+            &:nth-child(2n+1) { clear: none; }
+            &:nth-child(2n) { clear: both; }
+            &:first-child {
+                width: 100%;
+                & ~ li {
+                    figure {
+                        & > a {
+                            max-height: 120px; overflow: hidden;
+                            img { min-height: 120px; }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.has-carousel {
+            ul li { clear: none !important; }
+        }
+
+        > footer {
+            .pagination {
+                li {
+                    clear: none !important; width: auto; float: none; padding: 0;
+                }
+            }
+        }
+    }
+}

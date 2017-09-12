@@ -1,0 +1,22 @@
+#menu{
+	ul {
+		list-style: none; padding: 0; margin: 0; height: $menu-height; margin-top: $header-height - $menu-height; transition: 0.2s all;
+		li {
+			float: right; line-height: $menu-height; position: relative;
+			a {
+				display: block; padding: 0 20px;
+			}
+			&:hover {
+				background: $light;
+				a { color: #fff; }
+				> .submenu { opacity: 1; visibility: visible; }
+			}
+		}
+		&.submenu {
+			position: absolute; top: $menu-height; right: 0; background: $light; width: 200px; opacity: 0; visibility: hidden; transition: 0.2s all; margin-top: 0; height: auto;
+			li {
+				float: none;
+			}
+		}
+	}
+}

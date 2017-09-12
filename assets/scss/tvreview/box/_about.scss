@@ -1,0 +1,14 @@
+.box.about {
+    ul li{
+        figure{
+            @include responsive-ratio(2.5 1);
+            text-align: center;
+            img {
+                width: auto;
+            }
+        }
+        .desc{
+            text-align: center;
+        }
+    }
+}

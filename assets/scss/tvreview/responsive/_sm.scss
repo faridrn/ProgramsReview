@@ -1,0 +1,20 @@
+@include media-breakpoint-down(sm) {
+	.box {
+		&.cols {
+			&.cols-4 {
+				ul li {
+					width: 50%;
+					&:nth-child(4n+1) { clear: none; }
+					&:nth-child(2n+1) { clear: both; }
+				}
+			}
+			&.cols-6 {
+				ul li {
+					width: 50%;
+					&:nth-child(n+1) { clear: none; }
+					&:nth-child(0n+1) { clear: both; }
+				}
+			}
+		}
+	}
+}

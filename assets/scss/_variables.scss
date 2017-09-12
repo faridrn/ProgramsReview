@@ -1,0 +1,45 @@
+// Defenitions
+$fonts-path: '../font/icons/';
+$font-name-icons: 'nastooh';
+$font-family-icons: 'nastooh';
+
+// Colors
+// Main colors
+$primary: #009688;
+$accent: #FF9800;
+$light: #25c1ec;
+
+// Element colors
+$link-color: $primary;
+$link-hover-color: $accent;
+
+// Sizings
+$wrapper-width: 100%;
+
+// Header
+$header-bg: rgba(0, 0, 0, 0.6);
+$header-text-color: #eee;
+$header-height: 90px;
+$header-link-color: #fff;
+$header-link-hover-color: $accent;
+$menu-height: 55px;
+
+$logo-width: $header-height;
+//$logo-height: $logo-width + 30;
+$logo-height: $header-height;
+
+// Boxes 
+$box-bg: transparent;
+$box-padding: 0;
+$box-margin: 0;
+$box-border: 0 none;
+$box-shadow: 0 0 transparent;
+$box-link-color: darken(theme-color("primary"), 25%);
+$box-link-hover-color: darken(theme-color("primary"), 15%);
+// Box-specific variables
+$slideshow-bg: #323843;
+
+$title-font: $font-weight-bold #{$font-size-base}/1.4 $font-family-base;
+
+// Misc
+$t: 0.2s all;

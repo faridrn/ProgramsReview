@@ -1,0 +1,22 @@
+#footer {
+    
+}
+#copyright { 
+	font-size: 12px; text-align: center; margin: $grid-gutter-width 0;
+	li {
+		height: 53px;
+		line-height: 53px;
+	}
+	.footer-social{
+		font-size: 40px;
+		:hover{
+			color: $light;
+		}
+	}
+	.footer-year{
+		text-align: left;
+	}
+	.footer-copyright{
+		text-align: right;
+	}
+}

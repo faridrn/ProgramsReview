@@ -1,0 +1,26 @@
+.box.contact-details {
+	background: rgba(255, 255, 255, 0.8); padding: $grid-gutter-width $grid-gutter-width;
+    border: 12px solid transparent;
+    border-image: 16 repeating-linear-gradient(-45deg, red 0, red 1em, transparent 0, transparent 2em,
+		#58a 0, #58a 3em, transparent 0, transparent 4em);
+    ul li{
+		padding: 10px 0;
+		span{
+			font-weight: bold;
+			&:before {
+				content: ': ';
+			}
+		}
+		&.tel{
+			span{
+				direction: ltr;
+			}
+		}
+		i {
+			font-size: 18px; display: inline-block; background: rgba(0, 0, 0, 0.1); text-align: center; border-radius: 50%; margin-left: 10px; width: 32px; height: 32px; line-height: 32px;
+		}
+    }
+	img {
+		width: 100%;
+	}
+}

@@ -147,21 +147,40 @@ Handlebars.registerHelper("time2px", function (value, options) {
     };
     this.addEventListeners = function () {
         var self = this;
-        $(document).ajaxStart(function () {
-            $("body").addClass("loading");
-        })
-                .ajaxStop(function () {
-                    $("body").removeClass("loading");
-                });
-        $(document).on('click', ".items li .syn", function (e) {
-            e.stopPropagation();
-            var $li = $(this).parents("li:first");
-            $li.hasClass("active") && $li.removeClass("active");
-            $("#player").length > 0 && $("#player").slideUp(function () {
-                $(this).remove();
-            });
-            $(".items li").removeClass('active') && $li.addClass("active");
-        })
+        $(document)
+                .on('click', ".items li .syn", function (e) {
+                    e.stopPropagation();
+                    if ($("body").hasClass("timeline"))
+                        return false;
+                    var $li = $(this).parents("li:first");
+                    $li.hasClass("active") && $li.removeClass("active").trigger('deactivated');
+                    $("#player").length > 0 && $("#player").slideUp(function () {
+                        $(this).remove();
+                    });
+                    $(".items li.active").removeClass('active').trigger('deactivated') && $li.addClass("active").trigger('activated');
+                })
+                .on('activated', ".items li", function (e) {
+                    var $img = $(this).find(".dtl figure img");
+                    if ($img.attr('src').indexOf('placeholder') === -1) {
+                        self.cache.sliderInterval = window.setInterval(function () {
+                            var src, digit = 1;
+                            if ($img.attr('src').indexOf('005') !== -1)
+                                src = $img.attr('src').replace('005', '001');
+                            else
+                                src = [$img.attr('src').split('00')[0], '00', ~~$img.attr('src').split('00')[1].split('.')[0] + 1, '.jpg'].join('');
+                            $img.fadeOut(function() {
+                                $img.attr('src', src).fadeIn();
+                            });
+                        }, 5000);
+                    }
+                })
+                .on('deactivated', ".items li", function (e) {
+                    var $img = $(this).find(".dtl figure img");
+                    if ($img.attr('src').indexOf('placeholder') === -1) {
+                        clearInterval(self.cache.sliderInterval);
+                        $img.attr('src', $img.attr('src').replace(/img_.*.\d.jpg/g, 'img_001.jpg'));
+                    }
+                })
                 .on('click', "#toggle-datepicker", function () {
                     $("#datepicker").toggle();
                 })
@@ -204,11 +223,17 @@ Handlebars.registerHelper("time2px", function (value, options) {
                 .on('click', ".channels li", function () {
                     self.mode !== "timeline" && self.loadChannel($(this));
                 })
-                .on('click', ".box.items figure", function () {
+                .on('click', ".box.items .dtl figure", function () {
                     self.playItem($(this).parents("li:first"));
                 })
                 .on('click', "#days li", function () {
                     !$(this).hasClass("active") && self.datepicker.data().datepicker.setDate($(this).data('unix') * 1000) && self.refreshDays();
+                })
+                .ajaxStart(function () {
+                    $("body").addClass("loading");
+                })
+                .ajaxStop(function () {
+                    $("body").removeClass("loading");
                 });
     };
     this.loadChannel = function ($el) {
@@ -333,8 +358,16 @@ Handlebars.registerHelper("time2px", function (value, options) {
             return false;
         $(".box.items [data-duration][data-start]").each(function () {
             if ($(this).data("start") + $(this).data("duration") > now && $(this).data("start") < now)
-                $(this).addClass('current') && $(".box.items ul").animate({scrollTop: $(this).position().top - 40});
+                $(this).addClass('current');
         });
+        window.setTimeout(function () {
+            if ($(".box.items .current").length) {
+                if ($(".box.items").hasClass('has-scroll'))
+                    $(".box.items ul").slimScroll({scrollTo: $(".box.items .current").position().top - 40 + 'px'});
+                else
+                    $(".box.items ul").animate({scrollTop: $(".box.items .current").position().top - 40});
+            }
+        }, 500);
     };
     this.setSlider = function (items) {
         var self = this;

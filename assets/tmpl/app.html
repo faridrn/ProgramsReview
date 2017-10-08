@@ -1,0 +1,47 @@
+<header id="header">
+	<div class="container">
+		<h1>
+			<!--<i class="icon-{{icon}}"></i> {{title}}-->
+			<img src="assets/img/irib.png" />
+		</h1>
+		<time></time>
+		<ul class="tools">
+			<li class="active" id="toggle-datepicker" title="نمایش / حذف تقویم"><i class="icon-calendar"></i></li>
+			<li class="active" id="toggle-channels" title="کوچک / بزرگ کردن کانال‌ها"><i class="icon-dots"></i></li>
+			<li class="active" id="toggle-mode-timeline" title="تغییر حالت به تایم‌لاین"><i class="icon-th-large"></i></li>
+		</ul>
+	</div>
+</header>
+<main id="mainbody">
+	<div class="container-fluid">
+		<div class="row">
+			<div id="channels" class="">
+				<section class="box channels has-scroll">
+					<div>
+						<ul>
+							{{#each channels}}
+							<li id="{{id}}">
+								<span class="img">
+									<img src="assets/img/channels/{{@key}}.png" alt="{{title}}" />
+								</span>
+								<span class="title">{{title}}</span>
+							</li>
+							{{/each}}
+						</ul>
+					</div>
+				</section>
+			</div>
+			<div class="" id="items">
+				<small id="last-update" class="text-muted d-none">
+					آخرین به‌روزرسانی: 
+					<span></span>
+				</small>
+				<div class="filter-start"></div>
+				<div class="duration-filter slider"></div>
+				<div class="filter-end"></div>
+				<ul id="days"></ul>
+				<div id="datepicker"></div>
+			</div>
+		</div>
+	</div>
+</main>

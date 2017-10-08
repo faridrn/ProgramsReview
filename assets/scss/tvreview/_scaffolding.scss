@@ -1,7 +1,7 @@
 a {
     transition: 0.2s all;
 }
-
+.container { margin: 0; float: right; clear: right; padding-right: $grid-gutter-width; }
 // RTL
-.wrapper, .container, section { direction: rtl; text-align: right; }
+.wrapper, .container, .container-fluid { direction: rtl; text-align: right; }
 /*[class*="col-"] { float: right; }*/

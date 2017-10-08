@@ -1,0 +1,28 @@
+.datepicker-plot-area {
+  // sass-lint:disable force-element-nesting
+  .datepicker-year-view .year-item,
+  .datepicker-month-view .month-item {
+    display: block;
+    width: 33.333333%;
+    margin: 2px 0 0;
+    float: right;
+    height: 36px;
+    line-height: 34px;
+    @extend %date-item;
+
+    &:hover {
+      @extend %date-item-hover;
+    }
+
+    &.selected {
+      @extend %date-item-selected;
+    }
+  }
+
+  .datepicker-year-view .year-item-disable,
+  .datepicker-month-view .month-item-disable {
+    @extend %date-item-disable;
+  }
+  // sass-lint:enable force-element-nesting
+
+}

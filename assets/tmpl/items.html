@@ -1,0 +1,22 @@
+<section class="box items has-scroll">
+	<ul>
+		{{#each []}}
+		<li data-url="?c={{channel}}&start={{useSlashes startMiladi}}&end={{useSlashes endMiladi}}" data-duration="{{duration}}" data-start="{{getSeconds start}}">
+			<div class="syn">
+				<time>{{getTime start}}</time>
+				<figure>
+					<span><img src="{{thumb}}" alt="{{title}}" /></span>
+				</figure>
+				<h3>{{title}} <small>({{sec2time duration}})</small></h3>
+			</div>
+			<div class="dtl">
+				<figure>
+					<span><img src="{{thumb}}" alt="{{title}}" /></span>
+				</figure>
+				<p>{{description}}</p>
+				<p>مدت: {{sec2time duration}}</p>
+			</div>
+		</li>
+		{{/each}}
+	</ul>
+</section>

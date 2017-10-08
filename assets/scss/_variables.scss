@@ -1,13 +1,22 @@
 // Defenitions
 $fonts-path: '../font/icons/';
-$font-name-icons: 'nastooh';
-$font-family-icons: 'nastooh';
+$font-name-icons: 'icons';
+$font-family-icons: 'icons';
 
 // Colors
 // Main colors
-$primary: #009688;
-$accent: #FF9800;
-$light: #25c1ec;
+$primary-color-dark:   #1976D2;
+$primary-color:        #2196F3;
+$primary-color-light:  #BBDEFB;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #FF5252;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
+
+$primary: $primary-color;
+$accent: $accent-color;
+$light: $primary-color-light;
 
 // Element colors
 $link-color: $primary;
@@ -17,12 +26,12 @@ $link-hover-color: $accent;
 $wrapper-width: 100%;
 
 // Header
-$header-bg: rgba(0, 0, 0, 0.6);
+$header-bg: $primary-color;
 $header-text-color: #eee;
-$header-height: 90px;
+$header-height: 100px;
 $header-link-color: #fff;
 $header-link-hover-color: $accent;
-$menu-height: 55px;
+$menu-height: 100px;
 
 $logo-width: $header-height;
 //$logo-height: $logo-width + 30;
@@ -36,6 +45,7 @@ $box-border: 0 none;
 $box-shadow: 0 0 transparent;
 $box-link-color: darken(theme-color("primary"), 25%);
 $box-link-hover-color: darken(theme-color("primary"), 15%);
+$items-height-closed: 35px;
 // Box-specific variables
 $slideshow-bg: #323843;
 

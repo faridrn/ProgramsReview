@@ -1,0 +1,23 @@
+<section class="box items">
+	<ul>
+		{{#each []}}
+		<li data-url="?c={{channel}}&start={{useSlashes startMiladi}}&end={{useSlashes endMiladi}}"
+			data-duration="{{duration}}"
+			data-start="{{getSeconds start}}"
+			data-index="{{@index}}"
+			data-thumbnail="{{thumb}}"
+			data-title="<strong>{{title}}</strong><p>مدت: {{sec2time duration}}</p><p>{{description}}</p>"
+			style="width: {{sec2px duration}}px; right: {{time2px start}}px"
+			>
+			<div class="syn">
+				<time>{{getTime start}}</time>
+				<h3>{{title}} <small>{{sec2time duration}}</small></h3>
+			</div>
+			<div class="dtl">
+				
+				
+			</div>
+		</li>
+		{{/each}}
+	</ul>
+</section>

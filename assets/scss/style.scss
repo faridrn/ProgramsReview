@@ -13,9 +13,9 @@ $bootstrap-version: '4.0.0-beta';
 @import 'components/components';
 
 // Project Stylesheets
-@import 'nastooh/scaffolding';
-@import 'nastooh/parts/parts';
-@import 'nastooh/styles/styles';
-@import 'nastooh/pages/pages';
-@import 'nastooh/box/box';
-@import 'nastooh/responsive/responsive';
+@import 'tvreview/scaffolding';
+@import 'tvreview/parts/parts';
+// @import 'tvreview/styles/styles';
+// @import 'tvreview/pages/pages';
+@import 'tvreview/box/box';
+@import 'tvreview/responsive/responsive';

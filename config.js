@@ -2,6 +2,7 @@ var Config = {
     mode: 'timeline',
     unit: 0.1,
     icon: 'youtube-play',
+    sliderSpeed: 400,
     title: 'سامانه بازبینی',
     channels: {
         'tv1': {

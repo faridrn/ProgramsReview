@@ -160,18 +160,15 @@ Handlebars.registerHelper("time2px", function (value, options) {
                     $(".items li.active").removeClass('active').trigger('deactivated') && $li.addClass("active").trigger('activated');
                 })
                 .on('activated', ".items li", function (e) {
-                    var $img = $(this).find(".dtl figure img");
+                    var $img = $(this).find(".dtl figure img"), speed = typeof Config.sliderSpeed !== "undefined" ? Config.sliderSpeed : 500;
                     if ($img.attr('src').indexOf('placeholder') === -1) {
                         self.cache.sliderInterval = window.setInterval(function () {
-                            var src, digit = 1;
-                            if ($img.attr('src').indexOf('005') !== -1)
-                                src = $img.attr('src').replace('005', '001');
-                            else
-                                src = [$img.attr('src').split('00')[0], '00', ~~$img.attr('src').split('00')[1].split('.')[0] + 1, '.jpg'].join('');
-                            $img.fadeOut(function() {
-                                $img.attr('src', src).fadeIn();
-                            });
-                        }, 5000);
+                            var src = $img.attr('src').indexOf('005') !== -1 ? $img.attr('src').replace('005', '001') : [$img.attr('src').split('00')[0], '00', ~~$img.attr('src').split('00')[1].split('.')[0] + 1, '.jpg'].join('');
+//                            $img.fadeOut(function() {
+//                                $img.attr('src', src).fadeIn();
+                                $img.attr('src', src);
+//                            });
+                        }, speed);
                     }
                 })
                 .on('deactivated', ".items li", function (e) {

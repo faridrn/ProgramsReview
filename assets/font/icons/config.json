@@ -149,6 +149,30 @@
       "css": "list-bullet",
       "code": 61642,
       "src": "fontawesome"
+    },
+    {
+      "uid": "3a00327e61b997b58518bd43ed83c3df",
+      "css": "login",
+      "code": 59413,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "0d20938846444af8deb1920dc85a29fb",
+      "css": "logout",
+      "code": 59414,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "bbfb51903f40597f0b70fd75bc7b5cac",
+      "css": "trash",
+      "code": 61944,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "f886d2d6cc8cb1b1117e26819a7bc282",
+      "css": "more",
+      "code": 59415,
+      "src": "iconic"
     }
   ]
 }

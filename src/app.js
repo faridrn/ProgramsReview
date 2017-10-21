@@ -166,7 +166,7 @@ Handlebars.registerHelper("time2px", function (value, options) {
                             var src = $img.attr('src').indexOf('005') !== -1 ? $img.attr('src').replace('005', '001') : [$img.attr('src').split('00')[0], '00', ~~$img.attr('src').split('00')[1].split('.')[0] + 1, '.jpg'].join('');
 //                            $img.fadeOut(function() {
 //                                $img.attr('src', src).fadeIn();
-                                $img.attr('src', src);
+                            $img.attr('src', src);
 //                            });
                         }, speed);
                     }
@@ -222,6 +222,10 @@ Handlebars.registerHelper("time2px", function (value, options) {
                 })
                 .on('click', ".box.items .dtl figure", function () {
                     self.playItem($(this).parents("li:first"));
+                })
+                .on('click', "#logout", function () {
+                    localStorage.removeItem(self.storageKey + '$token') && localStorage.removeItem(self.storageKey + '$user');
+                    window.location.reload();
                 })
                 .on('click', "#days li", function () {
                     !$(this).hasClass("active") && self.datepicker.data().datepicker.setDate($(this).data('unix') * 1000) && self.refreshDays();
@@ -410,6 +414,12 @@ Handlebars.registerHelper("time2px", function (value, options) {
 
     var __initialize = function (self) {
         self.storageKey = "ott" + '_' + window.location.host.replace(/\./g, '').split(":")[0];
+        if (localStorage.getItem(storageKey + '$token') === null)
+            window.location.href = '/login.html';
+        else
+            $.ajaxSetup({
+//                headers: {'Authorization': localStorage.getItem(storageKey + '$token')}
+            });
         if (localStorage.getItem(storageKey + '$mode') !== null)
             self.mode = localStorage.getItem(storageKey + '$mode');
         else {

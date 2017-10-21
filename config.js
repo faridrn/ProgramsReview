@@ -75,6 +75,7 @@ var Config = {
         },
     },
     api: {
+        login: 'http://au.iktv.ir:8080/api/accounts/login',
         items: 'http://au.iktv.ir:60001/assets/proxy.php?u=http://172.16.16.201:8080/api/share/ott/epg',
 //        items: 'test/medialist.json',
         media: 'http://172.16.16.69/archive/list.m3u8',

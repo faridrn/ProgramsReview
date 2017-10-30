@@ -189,6 +189,13 @@ Handlebars.registerHelper("time2px", function (value, options) {
                     localStorage.setItem(storageKey + '$mode', 'timeline');
                     window.location.reload();
                 })
+                .on('click', "#toggle-lights", function () {
+                    ////
+                    if (localStorage.getItem(storageKey + '$night-mode') !== null)
+                        $("body").removeClass('dark') && localStorage.removeItem(storageKey + '$night-mode');
+                    else
+                        $("body").addClass('dark') && localStorage.setItem(storageKey + '$night-mode', true);
+                })
                 .on('click', "body.timeline #items li, body.timeline #items li .syn", function (e) {
                     if (typeof self.cache.firstTimelineItemInit === "undefined") {
                         $("#desc").fadeIn() && $("#items").animate({'margin-left': '300px'});
@@ -410,16 +417,18 @@ Handlebars.registerHelper("time2px", function (value, options) {
         $(".box.items").hasClass('has-scroll') && window.setTimeout(function () {
             $(".box.items > ul").slimScroll({destroy: true}).slimScroll({height: $(window).height() - 120, position: 'left', alwaysVisible: false});
         }, 100);
-    }
+    };
 
     var __initialize = function (self) {
         self.storageKey = "ott" + '_' + window.location.host.replace(/\./g, '').split(":")[0];
         if (localStorage.getItem(storageKey + '$token') === null)
             window.location.href = '/login.html';
         else
-            $.ajaxSetup({
-//                headers: {'Authorization': localStorage.getItem(storageKey + '$token')}
+            window.location.href.indexOf("localhost") === -1 && $.ajaxSetup({
+                headers: {'Authorization': localStorage.getItem(storageKey + '$token')}
             });
+        if (localStorage.getItem(storageKey + '$night-mode') !== null)
+            $("body").addClass('dark');
         if (localStorage.getItem(storageKey + '$mode') !== null)
             self.mode = localStorage.getItem(storageKey + '$mode');
         else {

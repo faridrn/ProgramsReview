@@ -15,7 +15,7 @@ $bootstrap-version: '4.0.0-beta';
 // Project Stylesheets
 @import 'tvreview/scaffolding';
 @import 'tvreview/parts/parts';
-// @import 'tvreview/styles/styles';
+@import 'tvreview/styles/styles';
 @import 'tvreview/pages/pages';
 @import 'tvreview/box/box';
 @import 'tvreview/responsive/responsive';

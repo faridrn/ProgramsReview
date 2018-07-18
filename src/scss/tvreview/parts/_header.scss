@@ -1,5 +1,5 @@
 #header {
-    background: url('../img/header.png') no-repeat right 180px center $header-bg; height: $header-height; transition: 0.2s all; line-height: $header-height;
+    background: url('../img/header.png') no-repeat center center $header-bg; height: $header-height; transition: 0.2s all; line-height: $header-line-height;
     color: $header-text-color; overflow: visible; box-shadow: 0 2px 5px rgba(0,0,0,.26);
     position: fixed; width: 100%; top: 0; z-index: 500;
     a {
@@ -11,17 +11,31 @@
 		height: $header-height / 2;
 		#menu ul { margin-top: 0; }
 	}
-    h1 { margin: 0; line-height: $header-height; font-size: 28px; float: right; }
+    h1 { margin: 0; line-height: $header-line-height; font-size: 28px; float: right; }
     
     .tools {
-        margin: 0; padding: 0; list-style: none; position: absolute; top: 0; left: -240px; height: 60px; padding: 30px 0;
+        margin: 0; padding: 0; list-style: none; height: $masthead-height; padding: 0;
+        float: right;
+        /*position: absolute; top: 0; left: -240px;*/ 
         li {
-            border-radius: 50%; height: 60px - $grid-gutter-width; width: 60px - $grid-gutter-width; float: left; cursor: pointer;
-            margin-right: 7px; color: #fff; transition: 0.2s all; text-align: center; font-size: 16px; line-height: 60px - $grid-gutter-width;
-            &.active { background: lighten($primary-color-dark, 5%); }
-            &:hover { background: $primary-color-dark; }
+            border-radius: 50%; height: 24px; width: 24px; float: left; cursor: pointer; margin-top: 3px;
+            margin-right: 7px; color: #fff; transition: 0.2s all; text-align: center; font-size: 12px; line-height: 24px;
+            &.active { background: $primary; }
+            &:hover { background: $primary-color-light; color: #333; }
             &#toggle-channels i { display: block; transform: rotate(90deg); margin-left: -5px; }
         }        
     }
-    time { margin-right: 60px; font-size: 22px; text-align: left; width: 100px; display: inline-block; }
+    .user-links {
+        list-style: none; margin: 0; padding: 0; font-size: 13px;
+        float: left;
+        li {
+            background: darken($masthead-bg, 10%); padding: 1px $grid-gutter-width 0; cursor: pointer; transition: 0.2s all;
+            &:hover { background: $masthead-bg; }
+        }
+    } 
+    time { margin-right: 60px; font-size: 1rem; width: 100px; display: inline-block; }
+}
+#masthead {
+    height: $masthead-height; line-height: $masthead-height;
+    > .container { margin: 0 auto; float: none; clear: none; }
 }

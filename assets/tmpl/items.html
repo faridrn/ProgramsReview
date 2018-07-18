@@ -5,13 +5,13 @@
 			<div class="syn">
 				<time>{{getTime start}}</time>
 				<figure>
-					<span><img src="{{thumb}}" alt="{{title}}" /></span>
+					<span><img src="{{resolvePath thumb}}" alt="{{title}}" onerror="this.onerror=null;this.src='http://77.36.165.78/assets/img/placeholder.png'"/></span>
 				</figure>
 				<h3>{{title}} <small>({{sec2time duration}})</small></h3>
 			</div>
 			<div class="dtl">
 				<figure>
-					<span><img src="{{thumb}}" alt="{{title}}" /></span>
+					<span><img src="{{resolvePath thumb}}" alt="{{title}}" onerror="this.onerror=null;this.src='http://77.36.165.78/assets/img/placeholder.png'"/></span>
 				</figure>
 				<p>{{description}}</p>
 				<p>مدت: {{sec2time duration}}</p>

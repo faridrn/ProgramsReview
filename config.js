@@ -3,82 +3,114 @@ var Config = {
     unit: 0.1,
     icon: 'youtube-play',
     sliderSpeed: 400,
+    clockInterval: 600000,
+    maxDays: 4,
     title: 'سامانه بازبینی',
     channels: {
         'tv1': {
             title: 'یک',
-            id: 'tv1'
+            id: 'tv1',
+            type: 1,
+            access: 0
         },
         'tv2': {
             title: 'دو',
-            id: 'tv2'
+            id: 'tv2',
+            type: 1,
+            access: 0
         },
         'tv3': {
             title: 'سه',
-            id: 'tv3'
+            id: 'tv3',
+            type: 1,
+            access: 0
         },
         'tv4': {
             title: 'چهار',
-            id: 'tv4'
+            id: 'tv4',
+            type: 1,
+            access: 0
         },
         'tehran': {
             title: 'تهران',
-            id: 'tehran'
+            id: 'tehran',
+            type: 2,
+            access: 0
         },
-//        'irinn': {
-//            title: 'خبر',
-//            id: 'irinn'
-//        },
         'ofogh': {
             title: 'افق',
-            id: 'ofogh'
+            id: 'ofogh',
+            type: 1,
+            access: 0
         },
         'quran': {
             title: 'قرآن',
-            id: 'quran'
+            id: 'quran',
+            type: 1,
+            access: 0
         },
         'pooya': {
             title: 'پویا',
-            id: 'pooya'
+            id: 'pooya',
+            type: 1,
+            access: 0
         },
         'omid': {
             title: 'امید',
-            id: 'omid'
+            id: 'omid',
+            type: 1,
+            access: 0
         },
         'namayesh': {
             title: 'نمایش',
-            id: 'namayesh'
+            id: 'namayesh',
+            type: 1,
+            access: 0
         },
         'tamasha': {
             title: 'تماشا',
-            id: 'tamasha'
+            id: 'tamasha',
+            type: 1,
+            access: 0
         },
         'doctv': {
             title: 'مستند',
-            id: 'mostanad'
+            id: 'mostanad',
+            type: 1,
+            access: 0
         },
         'amouzesh': {
             title: 'آموزش',
-            id: 'amouzesh'
+            id: 'amouzesh',
+            type: 1,
+            access: 0
         },
         'salamat': {
             title: 'سلامت',
-            id: 'salamat'
+            id: 'salamat',
+            type: 1,
+            access: 0
         },
         'varzesh': {
             title: 'ورزش',
-            id: 'varzesh'
+            id: 'varzesh',
+            type: 1,
+            access: 0
         },
         'nasim': {
             title: 'نسیم',
-            id: 'nasim'
-        },
+            id: 'nasim',
+            type: 1,
+            access: 0
+        }
     },
+    useProxy: true,
     api: {
-        login: 'http://au.iktv.ir:8080/api/accounts/login',
-        items: 'http://au.iktv.ir:60001/assets/proxy.php?u=http://172.16.16.201:8080/api/share/ott/epg',
+        proxy: 'http://77.36.163.194/proxy.php',
+        login: 'http://172.16.16.201/api/accounts/domainlogin',
+        items: 'http://172.16.16.201/api/share/ott/epg',
 //        items: 'test/medialist.json',
-        media: 'http://172.16.16.69/archive/list.m3u8',
-        lastUpdate: 'http://au.iktv.ir:60001/assets/proxy.php?u=http://172.16.16.201:8080/api/share/ott/epg/lastupdate',
-    },
+        media: 'http://172.16.16.69/archive/list2.m3u8',
+        lastUpdate: 'http://172.16.16.201/api/share/ott/epg/lastupdate'
+    }
 };

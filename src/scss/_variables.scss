@@ -26,12 +26,16 @@ $link-hover-color: $accent;
 $wrapper-width: 100%;
 
 // Header
+$masthead-height: 30px;
+$masthead-bg: $primary-color;
 $header-bg: $primary-color;
 $header-text-color: #eee;
-$header-height: 100px;
+$header-default-height: 97px;
+$header-height: $header-default-height + $masthead-height;
+$header-line-height: $header-default-height;
 $header-link-color: #fff;
 $header-link-hover-color: $accent;
-$menu-height: 100px;
+$menu-height: $header-default-height;
 
 $logo-width: $header-height;
 //$logo-height: $logo-width + 30;

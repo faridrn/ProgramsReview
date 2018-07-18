@@ -69,6 +69,9 @@ Handlebars.registerHelper("persianDigits", function (value, options) {
 Handlebars.registerHelper("sec2px", function (value, options) {
     return value * Config.unit;
 });
+Handlebars.registerHelper("resolvePath", function (value, options) {
+    return (Config.useProxy) ? Config.api.proxy + '?csurl=' + value : value;
+});
 Handlebars.registerHelper("time2px", function (value, options) {
     try {
         var splitter = (value.indexOf('T') !== -1) ? 'T' : ' ';
@@ -81,13 +84,22 @@ Handlebars.registerHelper("time2px", function (value, options) {
 
 (function app() {
     this.datepicker = {};
-    this.cache = {channel: '', date: ''};
+    this.cache = {channel: '', date: '', clockInterval: 0};
     this.unit = Config.unit;
     this.templates = {
         app: 'assets/tmpl/app{mode}.html', items: 'assets/tmpl/items{mode}.html', item: 'assets/tmpl/item.html'
     };
 
     this.initClock = function (callback) {
+        var self = this;
+        window.setInterval(function () {
+            self.loadClock();
+        }, Config.clockInterval);
+        self.loadClock(function (clock) {
+            typeof callback !== "undefined" && callback(clock.toString().toEnglishDigits());
+        });
+    };
+    this.loadClock = function (callback) {
         var self = this;
         $.ajax({
             type: 'HEAD'
@@ -99,7 +111,8 @@ Handlebars.registerHelper("time2px", function (value, options) {
                 var clock = self.cache.clock = (zeroFill(d.getHours()) + ':' + zeroFill(d.getMinutes()) + ':' + zeroFill(d.getSeconds())).toPersianDigits();
                 $("#header time").text(self.cache.clock);
                 typeof callback !== "undefined" && callback(self.cache.clock.toString().toEnglishDigits());
-                window.setInterval(function () {
+                window.clearInterval(self.cache.clockInterval);
+                self.cache.clockInterval = window.setInterval(function () {
                     d.setSeconds(d.getSeconds() + 1);
                     clock = self.cache.clock = (zeroFill(d.getHours()) + ':' + zeroFill(d.getMinutes()) + ':' + zeroFill(d.getSeconds())).toPersianDigits();
                     $("#header time").text(clock);
@@ -121,16 +134,19 @@ Handlebars.registerHelper("time2px", function (value, options) {
     this.getDates = function () {
         var c = new persianDate($("#datepicker").val().split('/').map(Number));
         var dates = [];
+        var minDate = new persianDate().subtract('days', Config.maxDays).hours(0).minutes(0).seconds(0).format('X');
         for (var i = -12; i < 2; i++) {
             var m = c[i < 0 ? 'subtract' : 'add']('days', Math.abs(i));
-            dates.push({dd: m.format('ddd'), D: m.format('D'), X: ~~m.format('X'), c: i === 0 ? true : false});
+            if (minDate <= ~~m.format('X'))
+                dates.push({dd: m.format('ddd'), D: m.format('D'), X: ~~m.format('X'), c: i === 0 ? true : false});
         }
         return dates;
     };
     this.addCalendar = function (callback) {
         var self = this;
+        var minDate = new Date().setDate((new Date().getDate()) - Config.maxDays);
         var datepicker = self.datepicker = $("#datepicker").persianDatepicker({
-            format: 'YYYY/MM/DD', observer: true,
+            format: 'YYYY/MM/DD', observer: true, minDate: null, maxDate: minDate,
             onSelect: function (u) {
                 if (self.mode === "timeline")
                     self.loadTimeline($("#datepicker").val(), $(this).attr('id'));
@@ -138,7 +154,7 @@ Handlebars.registerHelper("time2px", function (value, options) {
                     self.loadItems($("#datepicker").val(), $("#channels li.active").attr('id')) && self.refreshDays();
             }
         });
-        datepicker.css({position: 'fixed', top: $("#toggle-datepicker").offset().top + 50, left: $("#toggle-datepicker").offset().left - $("#datepicker").width() + 40}).toggle() && callback(self.datepicker);
+        datepicker.css({position: 'fixed', top: $("#toggle-datepicker").offset().top + 30, left: $("#toggle-datepicker").offset().left - $("#datepicker").width() + 40}).toggle() && callback(self.datepicker);
     };
     this.refreshDays = function () {
         $.get({url: 'assets/tmpl/days.html', cache: false}).done(function (data) {
@@ -155,6 +171,7 @@ Handlebars.registerHelper("time2px", function (value, options) {
                     var $li = $(this).parents("li:first");
                     $li.hasClass("active") && $li.removeClass("active").trigger('deactivated');
                     $("#player").length > 0 && $("#player").slideUp(function () {
+                        flowplayer($("#player")).engine.hlsjs.stopLoad();
                         $(this).remove();
                     });
                     $(".items li.active").removeClass('active').trigger('deactivated') && $li.addClass("active").trigger('activated');
@@ -237,6 +254,18 @@ Handlebars.registerHelper("time2px", function (value, options) {
                 .on('click', "#days li", function () {
                     !$(this).hasClass("active") && self.datepicker.data().datepicker.setDate($(this).data('unix') * 1000) && self.refreshDays();
                 })
+                .on('change', "#channels-filter", function (e) {
+                    var type = $(this).val();
+                    if ($($(".box.channels li:visible")[0]).data('type') === type)
+                        return false;
+                    if (type == -1)
+                        $(".box.channels li:hidden").show(100);
+                    else {
+                        $(".box.channels li:visible").hide(100, function () {
+                            $(".box.channels").find('li[data-type="' + type + '"]:hidden').show(100);
+                        });
+                    }
+                })
                 .ajaxStart(function () {
                     $("body").addClass("loading");
                 })
@@ -266,7 +295,10 @@ Handlebars.registerHelper("time2px", function (value, options) {
     };
     this.loadItems = function (date, channel, method, $position) {
         var self = this, method = typeof method === 'undefined' ? 'prepend' : method, $position = typeof $position === 'undefined' ? $("#items") : $position;
-        $.get(Config.api.items, {date: date, channel: channel}).done(function (items) {
+        var path = Config.useProxy ? Config.api.proxy : Config.api.items;
+        var params = Config.useProxy ? {csurl: Config.api.items, date: date, channel: channel} : {date: date, channel: channel};
+        $.get(path, params).done(function (items) {
+//        $.get(Config.api.items, {date: date, channel: channel}).done(function (items) {
             localStorage.setItem([self.storageKey + '$' + channel], JSON.stringify(items));
             $.get({url: self.templates.items.replace(/{mode}/, self.mode === 'default' ? '' : '-' + self.mode), cache: false}).done(function (data) {
                 $("#last-update span").empty().promise().done(function () {
@@ -322,7 +354,7 @@ Handlebars.registerHelper("time2px", function (value, options) {
             typeof self.cache.handleFixedElements === "undefined" && self.handleFixedElements();
             return;
         }
-        $.get(Config.api.lastUpdate, params).done(function (data) {
+        $.get(Config.useProxy ? Config.api.proxy + '?csurl=' + Config.api.lastUpdate : Config.api.lastUpdate, params).done(function (data) {
             $("#last-update span").text(data).parent().removeClass("d-none");
             var values = self.getValues(items, []);
             if (cache.channel === params.channel && cache.date === params.date) {
@@ -371,7 +403,7 @@ Handlebars.registerHelper("time2px", function (value, options) {
         window.setTimeout(function () {
             if ($(".box.items .current").length) {
                 if ($(".box.items").hasClass('has-scroll'))
-                    $(".box.items ul").slimScroll({scrollTo: $(".box.items .current").position().top - 40 + 'px'});
+                    $(".box.items ul").slimScroll({scrollTo: ($(".box.items .current").position().top + $('#items').height() + 80) + 'px'});
                 else
                     $(".box.items ul").animate({scrollTop: $(".box.items .current").position().top - 40});
             }
@@ -406,25 +438,33 @@ Handlebars.registerHelper("time2px", function (value, options) {
         });
     };
     this.playTimelineItem = function ($el) {
-        $("#fplayer").empty() && $("#fplayer").append('<div id="player" />') && flowplayer("#player", {autoplay: true, clip: {sources: [{type: "application/x-mpegurl", src: Config.api.media + $el.attr('data-url')}]}, speeds: [0.5, 1, 1.5, 2, 4]});
+        var url = Config.useProxy ? Config.api.proxy + '?csurl=' + Config.api.media + $el.attr('data-url').replace('?', '&') : Config.api.media + $el.attr('data-url');
+        $("#fplayer").empty() && $("#fplayer").append('<div id="player" />') && flowplayer("#player", {autoplay: true, clip: {sources: [{type: "application/x-mpegurl", src: url}]}, speeds: [0.5, 1, 1.5, 2, 4]});
     };
     this.playItem = function ($el, mode) {
         var self = this, position = "#player";
         if ($el.find("#player").length)
             return;
         $el.append('<div id="player" />');
-        flowplayer("#player", {autoplay: true, clip: {sources: [{type: "application/x-mpegurl", src: Config.api.media + $el.attr('data-url')}]}, speeds: [0.5, 1, 1.5, 2, 4]});
+        var url = Config.useProxy ? Config.api.proxy + '?csurl=' + Config.api.media + $el.attr('data-url').replace('?', '&') : Config.api.media + $el.attr('data-url');
+        flowplayer("#player", {autoplay: true, clip: {sources: [{type: "application/x-mpegurl", src: url}]}, speeds: [0.5, 1, 1.5, 2, 4]});
         $(".box.items").hasClass('has-scroll') && window.setTimeout(function () {
             $(".box.items > ul").slimScroll({destroy: true}).slimScroll({height: $(window).height() - 120, position: 'left', alwaysVisible: false});
         }, 100);
     };
+    this.initializeChannels = function () {
+        ch = $(".box.channels").css({width: $(".box.channels").parent().width()});
+        var selectedType = $("#channels-filter").val();
+        ch.find('li[data-type="' + selectedType + '"]').show(1);
+        ch.hasClass('has-scroll') && ch.find(">div").slimScroll({height: $(window).height() - 120, position: 'left', alwaysVisible: false});
+    }
 
     var __initialize = function (self) {
         self.storageKey = "ott" + '_' + window.location.host.replace(/\./g, '').split(":")[0];
         if (localStorage.getItem(storageKey + '$token') === null)
             window.location.href = '/login.html';
         else
-            window.location.href.indexOf("localhost") === -1 && $.ajaxSetup({
+            $.ajaxSetup({
                 headers: {'Authorization': localStorage.getItem(storageKey + '$token')}
             });
         if (localStorage.getItem(storageKey + '$night-mode') !== null)
@@ -446,8 +486,7 @@ Handlebars.registerHelper("time2px", function (value, options) {
                             self.refreshDays();
                         });
                     });
-                    ch = $(".box.channels").css({width: $(".box.channels").parent().width()});
-                    ch.hasClass('has-scroll') && ch.find(">div").slimScroll({height: $(window).height() - 120, position: 'left', alwaysVisible: false});
+                    self.initializeChannels();
                 });
             });
         });

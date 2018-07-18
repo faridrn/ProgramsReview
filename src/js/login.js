@@ -3,7 +3,8 @@ var storageKey = "ott" + '_' + window.location.host.replace(/\./g, '').split(":"
 $(function() {
     $(document).on('submit', ".login-page form", function(e) {
         e.preventDefault();
-        $.post(Config.api.login, $(this).serializeObject(), function(d) {
+        var path = Config.useProxy ? Config.api.proxy + '?csurl=' + Config.api.login : Config.api.login;
+        $.post(path, $(this).serializeObject(), function(d) {
             localStorage.setItem(storageKey + '$token', d.Token);
             localStorage.setItem(storageKey + '$user', d.Name + ' ' + d.Family);
             window.location.href = '/';

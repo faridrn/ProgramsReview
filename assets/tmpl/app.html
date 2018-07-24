@@ -6,7 +6,7 @@
 					<ul class="tools">
 						<!--<li class="active" id="logout" title="خروج از سیستم"><i class="icon-logout"></i></li>-->
 						<li class="active" id="toggle-datepicker" title="نمایش / حذف تقویم"><i class="icon-calendar"></i></li>
-						<li class="active" id="toggle-channels" title="کوچک / بزرگ کردن کانال‌ها"><i class="icon-dots"></i></li>
+						<!--<li class="active" id="toggle-channels" title="کوچک / بزرگ کردن کانال‌ها"><i class="icon-dots"></i></li>-->
 						<li class="active" id="toggle-mode-timeline" title="تغییر حالت به تایم‌لاین"><i class="icon-th-large"></i></li>
 						<li class="active" id="toggle-lights" title="تغییر حالت شب/روز"><i class="icon-moon"></i></li>
 					</ul>
@@ -25,12 +25,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
+<!--	<div class="container">
 		<h1>
-			<!--<i class="icon-{{icon}}"></i> {{title}}-->
 			<img src="assets/img/irib.png" />
 		</h1>
-	</div>
+	</div>-->
 </header>
 <main id="mainbody">
 	<div class="container-fluid">
@@ -38,25 +37,65 @@
 			<div id="channels" class="">
 				<section class="box channels has-scroll">
 					<header>
-						<select class="form-control" id="channels-filter">
-							<option value="-1">همه</option>
-							<option value="1" selected>سراسری</option>
-							<option value="2">استانی</option>
-							<option value="3">برون‌مرزی</option>
-							<option value="4">خارجی</option>
-						</select>
-					</header>
-					<div>
-						<ul>
-							{{#each channels}}
-							<li id="{{id}}" data-type="{{type}}" data-access="{{access}}">
-								<span class="img">
-									<img src="assets/img/channels/{{@key}}.png" alt="{{title}}" />
-								</span>
-								<span class="title">{{title}}</span>
+						<ul class="nav nav-tabs nav-fill" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="tab" href="#type-1">سراسری</a>
 							</li>
-							{{/each}}
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#type-2">استانی</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#type-0">سایر</a>
+							</li>
 						</ul>
+					</header>
+					<div class="box-content">
+						<div class="tab-content">
+							<div id="type-1" class="tab-pane fade show active" role="tabpanel">
+								<ul>
+									{{#each channels}}
+									{{#ifCond type '==' 1}}
+									<li id="{{id}}" data-type="{{type}}" data-access="{{access}}">
+										<span class="img">
+											<img src="assets/img/channels/{{@key}}.png" alt="{{title}}" />
+										</span>
+										<span class="title">{{title}}</span>
+									</li>
+									{{/ifCond}}
+									{{/each}}
+								</ul>
+							</div>
+							<div id="type-2" class="tab-pane fade" role="tabpanel">
+								<ul>
+									{{#each channels}}
+									{{#ifCond type '==' 2}}
+									<li id="{{id}}" data-type="{{type}}" data-access="{{access}}">
+										<span class="img">
+											<img src="assets/img/channels/{{@key}}.png" alt="{{title}}" />
+										</span>
+										<span class="title">{{title}}</span>
+									</li>
+									{{/ifCond}}
+									{{/each}}
+								</ul>
+							</div>
+							<div id="type-0" class="tab-pane fade" role="tabpanel">
+								<ul>
+									{{#each channels}}
+									{{#ifCond type '!=' 1}}
+									{{#ifCond type '!=' 2}}
+									<li id="{{id}}" data-type="{{type}}" data-access="{{access}}">
+										<span class="img">
+											<img src="assets/img/channels/{{@key}}.png" alt="{{title}}" />
+										</span>
+										<span class="title">{{title}}</span>
+									</li>
+									{{/ifCond}}
+									{{/ifCond}}
+									{{/each}}
+								</ul>
+							</div>
+						</div>
 					</div>
 				</section>
 			</div>

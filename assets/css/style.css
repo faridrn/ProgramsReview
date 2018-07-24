@@ -7431,38 +7431,43 @@ body.dark {
   margin-top: 0; }
   .box.channels > header select.form-control {
     /*height: calc(2rem + 2px);*/ }
-  .box.channels ul {
+  .box.channels > header ul {
+    margin: 0;
+    padding: 0; }
+    .box.channels > header ul.nav-tabs li a {
+      font-size: 13px;
+      padding: 8px 14px; }
+  .box.channels .box-content ul {
     margin: 0;
     padding: 0;
     list-style: none; }
-    .box.channels ul li {
+    .box.channels .box-content ul li {
       position: relative;
       height: 45px;
       line-height: 45px;
-      cursor: pointer;
-      display: none; }
-      .box.channels ul li span {
+      cursor: pointer; }
+      .box.channels .box-content ul li span {
         display: block;
         position: absolute;
         top: 0;
         right: 0; }
-        .box.channels ul li span.title {
+        .box.channels .box-content ul li span.title {
           right: 60px;
           -webkit-transition: 0.2s all;
           -o-transition: 0.2s all;
           transition: 0.2s all; }
-        .box.channels ul li span > img {
+        .box.channels .box-content ul li span > img {
           display: block;
           float: right;
           margin: 5px 5px 0 0; }
-      .box.channels ul li:after {
+      .box.channels .box-content ul li:after {
         display: block;
         content: ''; }
-      .box.channels ul li:hover {
+      .box.channels .box-content ul li:hover {
         background: #f8f9fa; }
-      .box.channels ul li.active {
+      .box.channels .box-content ul li.active {
         background: #BBDEFB; }
-        .box.channels ul li.active:after {
+        .box.channels .box-content ul li.active:after {
           position: absolute;
           height: 0;
           width: 0;

@@ -81,6 +81,30 @@ Handlebars.registerHelper("time2px", function (value, options) {
         console.log(e, value);
     }
 });
+Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+    switch (operator) {
+        case '==':
+            return (v1 == v2) ? options.fn(this) : options.inverse(this);
+        case '!=':
+            return (v1 != v2) ? options.fn(this) : options.inverse(this);
+        case '===':
+            return (v1 === v2) ? options.fn(this) : options.inverse(this);
+        case '<':
+            return (v1 < v2) ? options.fn(this) : options.inverse(this);
+        case '<=':
+            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+        case '>':
+            return (v1 > v2) ? options.fn(this) : options.inverse(this);
+        case '>=':
+            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+        case '&&':
+            return (v1 && v2) ? options.fn(this) : options.inverse(this);
+        case '||':
+            return (v1 || v2) ? options.fn(this) : options.inverse(this);
+        default:
+            return options.inverse(this);
+    }
+});
 
 (function app() {
     this.datepicker = {};
@@ -129,7 +153,7 @@ Handlebars.registerHelper("time2px", function (value, options) {
         if (self.mode === "timeline")
             self.loadTimeline($("#datepicker").val(), $(this).attr('id'));
         else
-            $(".channels").find("li:first").trigger('click');
+            $(".channels .box-content").find("li:first").trigger('click');
     };
     this.getDates = function () {
         var c = new persianDate($("#datepicker").val().split('/').map(Number));
@@ -241,7 +265,7 @@ Handlebars.registerHelper("time2px", function (value, options) {
                     else
                         $("#channels").css({"overflow": "visible"}).animate({"width": 200}) && $("#items").animate({'margin-right': 200});
                 })
-                .on('click', ".channels li", function () {
+                .on('click', ".channels .box-content li", function () {
                     self.mode !== "timeline" && self.loadChannel($(this));
                 })
                 .on('click', ".box.items .dtl figure", function () {
@@ -306,11 +330,17 @@ Handlebars.registerHelper("time2px", function (value, options) {
                     $position.append(Handlebars.compile(data)(items)).promise().done(function () {
                         self.afterLoad({date: date, channel: channel}, items);
                         if (self.mode !== "timeline") {
-                            $(".box.items").hasClass('has-scroll') && $(".box.items > ul").slimScroll({height: $(window).height() - 160, position: 'left', alwaysVisible: false});
+                            if ($(".box.items").hasClass('has-scroll'))
+                                $(".box.items .box-content").slimScroll({height: $(window).height() - 190, position: 'left', alwaysVisible: false});
                             $(window).on('resize', function () {
-                                $(".box.items").hasClass('has-scroll') && $(".box.items > ul").slimScroll({destroy: true}).slimScroll({height: $(window).height() - 160, position: 'left', alwaysVisible: false});
-                                ch = $(".box.channels").slimScroll({destroy: true});
-                                ch.hasClass('has-scroll') && ch.find(">div").slimScroll({height: $(window).height() - 160, position: 'left', alwaysVisible: false});
+                                if ($(".box.items").hasClass('has-scroll')) {
+                                    $(".box.items .box-content").slimScroll({destroy: true});
+                                    $(".box.items .box-content").slimScroll({height: $(window).height() - 190, position: 'left', alwaysVisible: false});
+                                }
+                                if ($(".box.channels").hasClass('has-scroll')) {
+                                    $(".box.channels .box-content").slimScroll({destroy: true});
+                                    $(".box.channels .box-content").slimScroll({height: $(window).height() - 190, position: 'left', alwaysVisible: false});
+                                }
                             });
                         }
                     });
@@ -449,14 +479,12 @@ Handlebars.registerHelper("time2px", function (value, options) {
         var url = Config.useProxy ? Config.api.proxy + '?csurl=' + Config.api.media + $el.attr('data-url').replace('?', '&') : Config.api.media + $el.attr('data-url');
         flowplayer("#player", {autoplay: true, clip: {sources: [{type: "application/x-mpegurl", src: url}]}, speeds: [0.5, 1, 1.5, 2, 4]});
         $(".box.items").hasClass('has-scroll') && window.setTimeout(function () {
-            $(".box.items > ul").slimScroll({destroy: true}).slimScroll({height: $(window).height() - 120, position: 'left', alwaysVisible: false});
+            $(".box.items .box-content").slimScroll({destroy: true}).slimScroll({height: $(window).height() - 109, position: 'left', alwaysVisible: false});
         }, 100);
     };
     this.initializeChannels = function () {
         ch = $(".box.channels").css({width: $(".box.channels").parent().width()});
-        var selectedType = $("#channels-filter").val();
-        ch.find('li[data-type="' + selectedType + '"]').show(1);
-        ch.hasClass('has-scroll') && ch.find(">div").slimScroll({height: $(window).height() - 120, position: 'left', alwaysVisible: false});
+        ch.hasClass('has-scroll') && ch.find("> .box-content").slimScroll({height: $(window).height() - 190, position: 'left', alwaysVisible: false});
     }
 
     var __initialize = function (self) {
@@ -466,6 +494,12 @@ Handlebars.registerHelper("time2px", function (value, options) {
         else
             $.ajaxSetup({
                 headers: {'Authorization': localStorage.getItem(storageKey + '$token')}
+                , statusCode: {
+                    401: function () {
+                        alert('مدت زمان حضور شما در سامانه به پایان رسیده است. لطفاً مجدد وارد سامانه شودید.');
+                        window.location.href = '/login.html';
+                    }
+                }
             });
         if (localStorage.getItem(storageKey + '$night-mode') !== null)
             $("body").addClass('dark');

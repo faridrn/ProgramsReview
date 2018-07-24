@@ -1,18 +1,35 @@
 <header id="header">
+	<div id="masthead">
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<ul class="tools">
+						<li class="active" id="toggle-datepicker" title="نمایش / حذف تقویم"><i class="icon-calendar"></i></li>
+						<li class="active" id="toggle-channels" title="کوچک / بزرگ کردن کانال‌ها"><i class="icon-dots"></i></li>
+						<li class="active" id="toggle-desc" title="نمایش / حذف اطلاعات برنامه"><i class="icon-doc-text"></i></li>
+						<li class="active" id="toggle-mode-default" title="تغییر حالت به یک شبکه"><i class="icon-list-bullet"></i></li>
+						<li class="active" id="toggle-lights" title="تغییر حالت شب/روز"><i class="icon-moon"></i></li>
+					</ul>
+					<time></time>
+				</div>
+				<div class="col-6">
+					<ul class="user-links">
+						<li id="logout" title="خروج از سیستم">
+							<div>
+								خروج از سیستم
+								<i class="icon-logout"></i>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<h1>
 			<!--<i class="icon-{{icon}}"></i> {{title}}-->
 			<img src="assets/img/irib.png" />
 		</h1>
-		<time></time>
-		<ul class="tools">
-			<li class="active" id="logout" title="خروج از سیستم"><i class="icon-logout"></i></li>
-			<li class="active" id="toggle-datepicker" title="نمایش / حذف تقویم"><i class="icon-calendar"></i></li>
-			<li class="active" id="toggle-channels" title="کوچک / بزرگ کردن کانال‌ها"><i class="icon-dots"></i></li>
-			<li class="active" id="toggle-desc" title="نمایش / حذف اطلاعات برنامه"><i class="icon-doc-text"></i></li>
-			<li class="active" id="toggle-mode-default" title="تغییر حالت به یک شبکه"><i class="icon-list-bullet"></i></li>
-			<li class="active" id="toggle-lights" title="تغییر حالت شب/روز"><i class="icon-moon"></i></li>
-		</ul>
 	</div>
 </header>
 <main id="mainbody">
@@ -21,6 +38,15 @@
 		<div class="">
 			<div id="channels" class="col-2 ml-auto">
 				<section class="box channels timeline">
+					<header style="height: 0; overflow: hidden;">
+						<select class="form-control" id="channels-filter" style="visibility: hidden;">
+							<option value="-1" selected>همه</option>
+							<option value="1">سراسری</option>
+							<option value="2">استانی</option>
+							<option value="3">برون‌مرزی</option>
+							<option value="4">خارجی</option>
+						</select>
+					</header>
 					<div>
 						<ul>
 							{{#each channels}}

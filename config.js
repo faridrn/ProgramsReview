@@ -4,7 +4,7 @@ var Config = {
     icon: 'youtube-play',
     sliderSpeed: 400,
     clockInterval: 600000,
-    maxDays: 4,
+    maxDays: 10,
     title: 'سامانه بازبینی',
     channels: {
         'tv1': {
@@ -103,8 +103,236 @@ var Config = {
             type: 1,
             access: 0
         }
+		,
+        'khorasan_shomali': {
+            title: 'خراسان شمالی',
+            id: 'khorasan_shomali',
+            type: 2,
+            access: 0
+        }
+		,
+        'sistan': {
+            title: 'سیستان و بلوچستان',
+            id: 'sistan',
+            type: 2,
+            access: 0
+        }
+		,
+        'khorasan_razavi': {
+            title: 'خراسان رضوی',
+            id: 'khorasan_razavi',
+            type: 2,
+            access: 0
+        }
+		,
+        'khorasan_jonobi': {
+            title: 'خراسان جنوبی',
+            id: 'khorasan_jonobi',
+            type: 2,
+            access: 0
+        }
+		,
+        'mahabad': {
+            title: 'مهاباد',
+            id: 'mahabad',
+            type: 2,
+            access: 0
+        }
+		,
+        'abadan': {
+            title: 'آبادان',
+            id: 'abadan',
+            type: 2,
+            access: 0
+        }
+		,
+        'mazandaran': {
+            title: 'مازندران',
+            id: 'mazandaran',
+            type: 2,
+            access: 0
+        }
+		,
+        'golestan': {
+            title: 'گلستان',
+            id: 'golestan',
+            type: 2,
+            access: 0
+        }
+		,
+        'azarbayejan_sharghi': {
+            title: 'آذربایجان شرقی',
+            id: 'azarbayejan_sharghi',
+            type: 2,
+            access: 0
+        }
+		,
+        'ardebil': {
+            title: 'اردبیل',
+            id: 'ardebil',
+            type: 2,
+            access: 0
+        }
+		,
+        'kermanshah': {
+            title: 'کرمانشاه',
+            id: 'kermanshah',
+            type: 2,
+            access: 0
+        }
+		,
+        'kordestan': {
+            title: 'کردستان',
+            id: 'kordestan',
+            type: 2,
+            access: 0
+        }
+		,
+        'ilam': {
+            title: 'ایلام',
+            id: 'ilam',
+            type: 2,
+            access: 0
+        }
+		,
+        'kerman': {
+            title: 'کرمان',
+            id: 'kerman',
+            type: 2,
+            access: 0
+        },
+        'hormozgan': {
+            title: 'هرمزگان',
+            id: 'hormozgan',
+            type: 2,
+            access: 0
+		}
+		,
+        'qazvin': {
+            title: 'قزوین',
+            id: 'qazvin',
+            type: 2,
+            access: 0
+        }
+		,
+        'gilam': {
+            title: 'گیلان',
+            id: 'gilan',
+            type: 2,
+            access: 0
+        }
+		,
+        'qom': {
+            title: 'قم',
+            id: 'qom',
+            type: 2,
+            access: 0
+        }
+		,
+        'markazi': {
+            title: 'مرکزی',
+            id: 'markazi',
+            type: 2,
+            access: 0
+        }
+		,
+        'hamedan': {
+            title: 'همدان',
+            id: 'hamedan',
+            type: 2,
+            access: 0
+        }
+		,
+        'zanjan': {
+            title: 'زنجان',
+            id: 'zanjan',
+            type: 2,
+            access: 0
+        }
+		,
+        'semnan': {
+            title: 'سمنان',
+            id: 'semnan',
+            type: 2,
+            access: 0
+        }
+		,
+        'alborz': {
+            title: 'البرز',
+            id: 'alborz',
+            type: 2,
+            access: 0
+        }
+		,
+        'kish': {
+            title: 'کیش',
+            id: 'kish',
+            type: 2,
+            access: 0
+        }
+		,
+        'fars': {
+            title: 'فارس',
+            id: 'fars',
+            type: 2,
+            access: 0
+        }
+		,
+        'bushehr': {
+            title: 'بوشهر',
+            id: 'bushehr',
+            type: 2,
+            access: 0
+        }
+		,
+        'kohgiloye': {
+            title: 'کهگیلویه و بویر احمد',
+            id: 'kohgiloye',
+            type: 2,
+            access: 0
+        },
+        'azarbayejan_gharbi': {
+            title: 'آذربایجان غربی',
+            id: 'azarbayejan_gharbi',
+            type: 2,
+            access: 0
+        },
+        'khozestan': {
+            title: 'خوزستان',
+            id: 'khozestan',
+            type: 2,
+            access: 0
+        }
+		,
+        'lorestan': {
+            title: 'لرستان',
+            id: 'lorestan',
+            type: 2,
+            access: 0
+        }
+		,
+        'chaharmahal': {
+            title: 'چهار محال بختیاری',
+            id: 'chaharmahal',
+            type: 2,
+            access: 0
+        }
+		,
+        'yazr': {
+            title: 'یزد',
+            id: 'yazd',
+            type: 2,
+            access: 0
+        }
+		,
+        'esfahan': {
+            title: 'اصفهان',
+            id: 'esfahan',
+            type: 2,
+            access: 0
+        }
     },
-    useProxy: true,
+    useProxy: location.host.indexOf('localhost:') !== -1 ? true : false,
     api: {
         proxy: 'http://77.36.163.194/proxy.php',
         login: 'http://172.16.16.201/api/accounts/domainlogin',

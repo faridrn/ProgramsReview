@@ -1,4 +1,5 @@
 //@prepros-prepend vendor/jquery-3.2.1.min.js
+//@prepros-prepend vendor/bootstrap-modified.js
 //@prepros-prepend vendor/handlebars-v4.0.5.js
 //@prepros-prepend vendor/flowplayer/flowplayer.min.js
 //@prepros-prepend vendor/hlsjs/hls.min.js

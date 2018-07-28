@@ -268,7 +268,10 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
                         $("#channels").css({"overflow": "visible"}).animate({"width": 200}) && $("#items").animate({'margin-right': 200});
                 })
                 .on('click', ".channels .box-content li", function (e) {
-                    self.mode !== "timeline" && self.loadChannel($(this), e);
+                    if (!$(e.target).is('.live'))
+                        self.mode !== "timeline" && self.loadChannel($(this), e);
+                    else
+                        self.loadLivePlayer($(e.target));
                 })
                 .on('click', ".box.items .dtl figure", function () {
                     self.playItem($(this).parents("li:first"));
@@ -302,12 +305,8 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
     this.loadChannel = function ($el, e) {
         e.preventDefault();
         var self = this;
-        if (!$(e.target).is('.live')) {
-            $(".channels li").removeClass('active');
-            $el.addClass("active") && this.loadItems($("#datepicker").val(), $el.attr('id'));
-        } else {
-            self.loadLivePlayer($(e.target));
-        }
+        $(".channels li").removeClass('active');
+        $el.addClass("active") && this.loadItems($("#datepicker").val(), $el.attr('id'));
     };
     this.loadLivePlayer = function ($el) {
         var url = $el.parents("li:first").attr('data-live');

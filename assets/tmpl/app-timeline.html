@@ -36,28 +36,37 @@
 	<div id="datepicker"></div>
 	<div class="container-fluid">
 		<div class="">
-			<div id="channels" class="col-2 ml-auto">
+			<div id="channels" class="ml-auto">
 				<section class="box channels timeline">
-					<header style="height: 0; overflow: hidden;">
-						<select class="form-control" id="channels-filter" style="visibility: hidden;">
-							<option value="-1" selected>همه</option>
-							<option value="1">سراسری</option>
-							<option value="2">استانی</option>
-							<option value="3">برون‌مرزی</option>
-							<option value="4">خارجی</option>
-						</select>
-					</header>
-					<div>
-						<ul>
-							{{#each channels}}
-							<li id="{{id}}">
-								<span class="img">
-									<img src="assets/img/channels/{{@key}}.png" alt="{{title}}" />
-								</span>
-								<span class="title">{{title}}</span>
+<!--					<header>
+						<ul class="nav nav-tabs nav-fill" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="tab" href="#type-1">سراسری</a>
 							</li>
-							{{/each}}
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#type-2">استانی</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#type-0">سایر</a>
+							</li>
 						</ul>
+					</header>-->
+					<div class="box-content" style="overflow: hidden;">
+						<div class="tab-content">
+							<div id="type-1" class="tab-pane fade show active" role="tabpanel">
+								<ul>
+									{{#each channels}}
+									<li id="{{id}}" data-type="{{type}}" data-access="{{access}}" {{#if live}}data-live="{{live}}"{{/if}}>
+										<span class="img">
+											<img src="assets/img/channels/{{@key}}.png" alt="{{title}}" />
+										</span>
+										<span class="title">{{title}}</span>
+										{{#if live}}<span class="live"><i class="icon-play"></i> پخش زنده</span>{{/if}}
+									</li>
+									{{/each}}
+								</ul>
+							</div>
+						</div>
 					</div>
 				</section>
 			</div>
@@ -75,6 +84,13 @@
 			</div>
 			<div id="desc"></div>
 			<div id="fplayer"></div>
+		</div>
+	</div>
+	<div id="playback-modal" class="modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div id="modal-player">
+			</div>
 		</div>
 	</div>
 </main>

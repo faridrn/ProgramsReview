@@ -193,11 +193,13 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
                     if ($("body").hasClass("timeline"))
                         return false;
                     var $li = $(this).parents("li:first");
-                    $li.hasClass("active") && $li.removeClass("active").trigger('deactivated');
-                    $("#player").length > 0 && $("#player").slideUp(function () {
-                        flowplayer($("#player")).engine.hlsjs.stopLoad();
-                        $(this).remove();
-                    });
+                    if ($li.hasClass("active")) {
+                        $li.removeClass("active").trigger('deactivated');
+                        $("#player").length > 0 && $("#player").slideUp(function () {
+                            flowplayer($("#player")).engine.hlsjs.stopLoad();
+                            $(this).remove();
+                        });
+                    }
                     $(".items li.active").removeClass('active').trigger('deactivated') && $li.addClass("active").trigger('activated');
                 })
                 .on('activated', ".items li", function (e) {
@@ -265,8 +267,8 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
                     else
                         $("#channels").css({"overflow": "visible"}).animate({"width": 200}) && $("#items").animate({'margin-right': 200});
                 })
-                .on('click', ".channels .box-content li", function () {
-                    self.mode !== "timeline" && self.loadChannel($(this));
+                .on('click', ".channels .box-content li", function (e) {
+                    self.mode !== "timeline" && self.loadChannel($(this), e);
                 })
                 .on('click', ".box.items .dtl figure", function () {
                     self.playItem($(this).parents("li:first"));
@@ -297,10 +299,30 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
                     $("body").removeClass("loading");
                 });
     };
-    this.loadChannel = function ($el) {
+    this.loadChannel = function ($el, e) {
+        e.preventDefault();
         var self = this;
-        $(".channels li").removeClass('active');
-        $el.addClass("active") && this.loadItems($("#datepicker").val(), $el.attr('id'));
+        if (!$(e.target).is('.live')) {
+            $(".channels li").removeClass('active');
+            $el.addClass("active") && this.loadItems($("#datepicker").val(), $el.attr('id'));
+        } else {
+            self.loadLivePlayer($(e.target));
+        }
+    };
+    this.loadLivePlayer = function ($el) {
+        var url = $el.parents("li:first").attr('data-live');
+        $("#playback-modal").off('show.bs.modal').off('hide.bs.modal').on('show.bs.modal', function () {
+            flowplayer("#modal-player", {
+                autoplay: true,
+                clip: {sources: [{type: "application/x-mpegurl", src: url}]}
+            });
+        }).on('hide.bs.modal', function () {
+            if ($.trim($("#modal-player").html()) !== '') {
+                var $parent = $("#modal-player").parent();
+                flowplayer($("#modal-player")).engine.hlsjs.stopLoad();
+                $parent.empty().append('<div id="modal-player"></div>');
+            }
+        }).modal();
     };
     this.addRulerMarks = function () {
         for (var i = 0; i < (3600 * 25); i = i + 1800)
@@ -478,9 +500,9 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
         $el.append('<div id="player" />');
         var url = Config.useProxy ? Config.api.proxy + '?csurl=' + Config.api.media + $el.attr('data-url').replace('?', '&') : Config.api.media + $el.attr('data-url');
         flowplayer("#player", {autoplay: true, clip: {sources: [{type: "application/x-mpegurl", src: url}]}, speeds: [0.5, 1, 1.5, 2, 4]});
-        $(".box.items").hasClass('has-scroll') && window.setTimeout(function () {
-            $(".box.items .box-content").slimScroll({destroy: true}).slimScroll({height: $(window).height() - 109, position: 'left', alwaysVisible: false});
-        }, 100);
+//        $(".box.items").hasClass('has-scroll') && window.setTimeout(function () {
+//            $(".box.items .box-content").slimScroll({destroy: true}).slimScroll({height: $(window).height() - 109, position: 'left', alwaysVisible: false});
+//        }, 100);
     };
     this.initializeChannels = function () {
         ch = $(".box.channels").css({width: $(".box.channels").parent().width()});

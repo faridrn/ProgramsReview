@@ -25,11 +25,11 @@
 			</div>
 		</div>
 	</div>
-<!--	<div class="container">
-		<h1>
-			<img src="assets/img/irib.png" />
-		</h1>
-	</div>-->
+	<!--	<div class="container">
+			<h1>
+				<img src="assets/img/irib.png" />
+			</h1>
+		</div>-->
 </header>
 <main id="mainbody">
 	<div class="container-fluid">
@@ -55,11 +55,12 @@
 								<ul>
 									{{#each channels}}
 									{{#ifCond type '==' 1}}
-									<li id="{{id}}" data-type="{{type}}" data-access="{{access}}">
+									<li id="{{id}}" data-type="{{type}}" data-access="{{access}}" {{#if live}}data-live="{{live}}"{{/if}}>
 										<span class="img">
 											<img src="assets/img/channels/{{@key}}.png" alt="{{title}}" />
 										</span>
 										<span class="title">{{title}}</span>
+										{{#if live}}<span class="live"><i class="icon-play"></i> پخش زنده</span>{{/if}}
 									</li>
 									{{/ifCond}}
 									{{/each}}
@@ -109,6 +110,13 @@
 				<div class="filter-end"></div>
 				<ul id="days"></ul>
 				<div id="datepicker"></div>
+			</div>
+		</div>
+	</div>
+	<div id="playback-modal" class="modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div id="modal-player">
 			</div>
 		</div>
 	</div>

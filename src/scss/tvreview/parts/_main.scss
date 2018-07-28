@@ -55,3 +55,10 @@ body {
     }
     &:hover i:after { visibility: visible; opacity: 1; }
 }
+
+#playback-modal {
+    .modal-dialog {
+        max-width: 720px;
+        top: 50%; margin-top: 0; margin-bottom: 0; transform: translateY(-50%);
+    }
+}

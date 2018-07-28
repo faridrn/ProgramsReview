@@ -11,97 +11,113 @@ var Config = {
             title: 'یک',
             id: 'tv1',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1371'
         },
         'tv2': {
             title: 'دو',
             id: 'tv2',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1372'
         },
         'tv3': {
             title: 'سه',
             id: 'tv3',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1373'
         },
         'tv4': {
             title: 'چهار',
             id: 'tv4',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1374'
         },
         'tehran': {
             title: 'تهران',
             id: 'tehran',
-            type: 2,
-            access: 0
+            type: 1,
+            access: 0,
+            live: 'http://172.16.16.103:1375'
         },
         'ofogh': {
             title: 'افق',
             id: 'ofogh',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1382'
         },
         'quran': {
             title: 'قرآن',
             id: 'quran',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1377'
         },
         'pooya': {
             title: 'پویا',
             id: 'pooya',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1384'
         },
         'omid': {
             title: 'امید',
             id: 'omid',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1387'
         },
         'namayesh': {
             title: 'نمایش',
             id: 'namayesh',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1381'
         },
         'tamasha': {
             title: 'تماشا',
             id: 'tamasha',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1385'
         },
         'doctv': {
             title: 'مستند',
             id: 'mostanad',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1380'
         },
         'amouzesh': {
             title: 'آموزش',
             id: 'amouzesh',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1376'
         },
         'salamat': {
             title: 'سلامت',
             id: 'salamat',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1378'
         },
         'varzesh': {
             title: 'ورزش',
             id: 'varzesh',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1383'
         },
         'nasim': {
             title: 'نسیم',
             id: 'nasim',
             type: 1,
-            access: 0
+            access: 0,
+            live: 'http://172.16.16.103:1379'
         }
 		,
         'khorasan_shomali': {
@@ -333,6 +349,7 @@ var Config = {
         }
     },
     useProxy: location.host.indexOf('localhost:') !== -1 ? true : false,
+//useProxy: false,
     api: {
         proxy: 'http://77.36.163.194/proxy.php',
         login: 'http://172.16.16.201/api/accounts/domainlogin',

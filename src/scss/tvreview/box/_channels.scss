@@ -19,6 +19,15 @@
                 display: block; position: absolute; top: 0; right: 0;
                 &.title { right: 60px; transition: 0.2s all; }
                 > img { display: block; float: right; margin: 5px 5px 0 0; }
+                &.live {
+                    line-height: 45px; width: 90px; position: absolute; right: auto; left: -88px; top: 0; height: 45px; font-size: 13px; transition: 0.2s all;
+                    /*background: #ededed;  color: #ddd;*/
+                    background: $box-link-color; color: #fff;
+                    i { font-size: 14px; margin: 0 4px; }
+                }
+            }
+            &:hover span.live {
+                 left: 0;
             }
             &:after { display: block; content: ''; }
             &:hover { background: $gray-100; }

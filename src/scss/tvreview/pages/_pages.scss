@@ -7,6 +7,9 @@
     top: 50%; left: 50%; bottom: auto; right: auto;
     transform: translateX(-50%) translateY(-50%);
     box-shadow: 0 0 300px #fff, 0 0 300px #fff, 0 0 300px #fff, 0 0 300px #fff, 0 0 300px #fff, 0 0 300px #fff, 0 0 300px #fff;
+    .modal-dialog {
+        z-index: 1998; pointer-events: unset;
+    }
 }
 .loginmodal-container {
   padding: 30px;
@@ -17,7 +20,7 @@
   border-radius: 2px;
   box-shadow: 0px 0px 80px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  
+  z-index: 2000;
 }
 
 .loginmodal-container h1 {

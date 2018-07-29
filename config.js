@@ -231,7 +231,7 @@ var Config = {
             access: 0
         }
 		,
-        'gilam': {
+        'gilan': {
             title: 'گیلان',
             id: 'gilan',
             type: 2,
@@ -334,7 +334,7 @@ var Config = {
             access: 0
         }
 		,
-        'yazr': {
+        'yazd': {
             title: 'یزد',
             id: 'yazd',
             type: 2,
@@ -349,12 +349,10 @@ var Config = {
         }
     },
     useProxy: location.host.indexOf('localhost:') !== -1 ? true : false,
-//useProxy: false,
     api: {
         proxy: 'http://77.36.163.194/proxy.php',
         login: 'http://172.16.16.201/api/accounts/domainlogin',
         items: 'http://172.16.16.201/api/share/ott/epg',
-//        items: 'test/medialist.json',
         media: 'http://172.16.16.69/archive/list2.m3u8',
         lastUpdate: 'http://172.16.16.201/api/share/ott/epg/lastupdate'
     }

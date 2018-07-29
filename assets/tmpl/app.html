@@ -37,20 +37,20 @@
 			<div id="channels" class="">
 				<section class="box channels has-scroll">
 					<header>
-						<ul class="nav nav-tabs nav-fill" role="tablist">
+						<ul class="nav nav-tabs nav-fill" id="channel-tabs" role="tablist">
 							<li class="nav-item">
-								<a class="nav-link active" data-toggle="tab" href="#type-1">سراسری</a>
+								<a class="nav-link active" data-toggle="tab" role="tab" href="#type-1" aria-selected="true">سراسری</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#type-2">استانی</a>
+								<a class="nav-link" data-toggle="tab" role="tab" href="#type-2" aria-selected="false">استانی</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#type-0">سایر</a>
+								<a class="nav-link" data-toggle="tab" role="tab" href="#type-0" aria-selected="false">سایر</a>
 							</li>
 						</ul>
 					</header>
 					<div class="box-content">
-						<div class="tab-content">
+						<div class="tab-content" id="channel-list">
 							<div id="type-1" class="tab-pane fade show active" role="tabpanel">
 								<ul>
 									{{#each channels}}

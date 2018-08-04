@@ -12,112 +12,112 @@ var Config = {
             id: 'tv1',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1371'
+            live: 'http://live.irib.ir/frame/t/tv1'
         },
         'tv2': {
             title: 'دو',
             id: 'tv2',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1372'
+            live: 'http://live.irib.ir/frame/t/tv2'
         },
         'tv3': {
             title: 'سه',
             id: 'tv3',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1373'
+            live: 'http://live.irib.ir/frame/t/tv3'
         },
         'tv4': {
             title: 'چهار',
             id: 'tv4',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1374'
+            live: 'http://live.irib.ir/frame/t/tv4'
         },
         'tehran': {
             title: 'تهران',
             id: 'tehran',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1375'
+            live: 'http://live.irib.ir/frame/t/tv5'
         },
         'ofogh': {
             title: 'افق',
             id: 'ofogh',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1382'
+            live: 'http://live.irib.ir/frame/t/ofogh'
         },
         'quran': {
             title: 'قرآن',
             id: 'quran',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1377'
+            live: 'http://live.irib.ir/frame/t/quran'
         },
         'pooya': {
             title: 'پویا',
             id: 'pooya',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1384'
+            live: 'http://live.irib.ir/frame/t/pouya'
         },
         'omid': {
             title: 'امید',
             id: 'omid',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1387'
+            live: 'http://live.irib.ir/frame/t/omid'
         },
         'namayesh': {
             title: 'نمایش',
             id: 'namayesh',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1381'
+            live: 'http://live.irib.ir/frame/t/namayesh'
         },
         'tamasha': {
             title: 'تماشا',
             id: 'tamasha',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1385'
+            live: 'http://live.irib.ir/frame/t/tamasha'
         },
         'doctv': {
             title: 'مستند',
             id: 'mostanad',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1380'
+            live: 'http://live.irib.ir/frame/t/mostanad'
         },
         'amouzesh': {
             title: 'آموزش',
             id: 'amouzesh',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1376'
+            live: 'http://live.irib.ir/frame/t/amouzesh'
         },
         'salamat': {
             title: 'سلامت',
             id: 'salamat',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1378'
+            live: 'http://live.irib.ir/frame/t/salamat'
         },
         'varzesh': {
             title: 'ورزش',
             id: 'varzesh',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1383'
+            live: 'http://live.irib.ir/frame/t/varzesh'
         },
         'nasim': {
             title: 'نسیم',
             id: 'nasim',
             type: 1,
             access: 0,
-            live: 'http://172.16.16.103:1379'
+            live: 'http://live.irib.ir/frame/t/nasim'
         }
 		,
         'khorasan_shomali': {

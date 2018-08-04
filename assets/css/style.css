@@ -7720,6 +7720,11 @@ body.timeline #desc {
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%); }
+  #playback-modal .modal-dialog .modal-content {
+    border-radius: 0;
+    border: 0 none; }
+  #playback-modal .modal-dialog #modal-player {
+    height: 405px; }
 
 #copyright {
   font-size: 12px;

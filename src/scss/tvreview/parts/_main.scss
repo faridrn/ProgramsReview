@@ -60,5 +60,7 @@ body {
     .modal-dialog {
         max-width: 720px;
         top: 50%; margin-top: 0; margin-bottom: 0; transform: translateY(-50%);
+        .modal-content { border-radius: 0; border: 0 none; }
+        #modal-player { height: 405px; }
     }
 }

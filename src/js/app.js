@@ -312,16 +312,18 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
     this.loadLivePlayer = function ($el) {
         var url = $el.parents("li:first").attr('data-live');
         $("#playback-modal").off('show.bs.modal').off('hide.bs.modal').on('show.bs.modal', function () {
-            flowplayer("#modal-player", {
-                autoplay: true,
-                clip: {sources: [{type: "application/x-mpegurl", src: url}]}
-            });
+            $('#modal-player').append('<iframe allowfullscreen="true" src="' + url + '" style="width: 720px; height: 100%; border: 0 none; margin: 0; padding: 0; min-height: 405px; overflow: hidden;"></iframe>');
+//            flowplayer("#modal-player", {
+//                autoplay: true,
+//                clip: {sources: [{type: "application/x-mpegurl", src: url}]}
+//            });
         }).on('hide.bs.modal', function () {
-            if ($.trim($("#modal-player").html()) !== '') {
-                var $parent = $("#modal-player").parent();
-                flowplayer($("#modal-player")).engine.hlsjs.stopLoad();
-                $parent.empty().append('<div id="modal-player"></div>');
-            }
+             $('#modal-player').empty();
+//            if ($.trim($("#modal-player").html()) !== '') {
+//                var $parent = $("#modal-player").parent();
+//                flowplayer($("#modal-player")).engine.hlsjs.stopLoad();
+//                $parent.empty().append('<div id="modal-player"></div>');
+//            }
         }).modal();
     };
     this.addRulerMarks = function () {
